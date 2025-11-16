@@ -17,7 +17,7 @@ pipeline {
             steps {
                 withCredentials([
                     usernamePassword(
-                        credentialsId: 'mongo-db-credentials', 
+                        credentialsId: '06a41492-8765-49c4-91f6-b759260140f0', 
                         usernameVariable: 'MONGO_USER',
                         passwordVariable: 'MONGO_PASSWORD'
                     )
