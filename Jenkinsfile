@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'docker-host' }
 
     environment {
         NETWORK_NAME = 'general-network'
@@ -14,14 +14,15 @@ pipeline {
         }
 
         stage('Run MongoDB Service') {
-            withCredentials([
-                credentialsId: 'mongo-db-credentials',
-                passwordVariable: 'MONGO_PASSWORD', 
-                usernameVariable: 'MONGO_USER'    
-            ]) {
                 steps {
-                    echo 'Starting the MongoDB container and the internal network'
-                    sh 'docker compose up -d'
+                    withCredentials([
+                        credentialsId: 'mongo-db-credentials',
+                        passwordVariable: 'MONGO_PASSWORD', 
+                        usernameVariable: 'MONGO_USER'    
+                    ]) {
+                        echo 'Starting the MongoDB container and the internal network'
+                        sh 'docker compose up -d'
+                    }
                 }
             }
         }
