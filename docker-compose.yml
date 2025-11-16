@@ -6,20 +6,17 @@ services:
     container_name: mongo-db-prod
     restart: always
     environment:
-      # Estas variables se inyectarán desde Jenkins (Paso 4)
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_USER}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
+      MONGO_INITDB_DATABASE: ontologies
     volumes:
       - mongo_data:/data/db
-    # NO expongas el puerto 27017 al host (ports:) a menos que sea estrictamente necesario.
-    # El acceso debe ser a través de la red interna de Docker.
     networks:
-      - general-network # Unir este servicio a la red externa
+      - general-network
 
 volumes:
   mongo_data:
 
-# Definición de la red externa
 networks:
   general-network:
-    external: true # Indica que esta red ya existe y debe ser compartida
+    external: true

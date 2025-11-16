@@ -23,7 +23,6 @@ pipeline {
                     )
                 ]) {
                     echo 'Starting the MongoDB container and the internal network'
-                    echo "Validación: El usuario de MongoDB es: ${env}"
                     sh 'docker compose up -d'
                 }
             }
