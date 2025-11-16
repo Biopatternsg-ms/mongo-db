@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker-host' }
+    agent any
 
     environment {
         NETWORK_NAME = 'general-network'
